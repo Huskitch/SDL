@@ -60,13 +60,13 @@ void Grid::ProgressStage()
 		for (int y = 0; y < scale.y; y++)
 		{
 			if (gridCells[x][y] == true && GetAdjacentCells(Vector2(x, y)) <= 1)
-				gridCells[x][y] = false;
+				gridCellBuffer[x][y] = false;
 
 			if (gridCells[x][y] == true && GetAdjacentCells(Vector2(x, y)) >= 4)
-				gridCells[x][y] = false;
+				gridCellBuffer[x][y] = false;
 
 			if (gridCells[x][y] == false && GetAdjacentCells(Vector2(x, y)) == 3)
-				gridCells[x][y] = true;
+				gridCellBuffer[x][y] = true;
 		}
 	}
 }
@@ -74,6 +74,7 @@ void Grid::ProgressStage()
 void Grid::PlaceCell(Vector2 position)
 {
 	gridCells[position.x][position.y] = true;
+	gridCellBuffer[position.x][position.y] = true;
 }
 
 int Grid::GetAdjacentCells(Vector2 position)
@@ -110,6 +111,7 @@ void Grid::SetScale(int x, int y)
 	this->scale.y = y;
 
 	gridCells = std::vector<std::vector<bool>>(scale.x, std::vector<bool>(scale.y, false));
+	gridCellBuffer = std::vector<std::vector<bool>>(scale.x, std::vector<bool>(scale.y, false));
 }
 
 void Grid::SetGridWidth(int width)
