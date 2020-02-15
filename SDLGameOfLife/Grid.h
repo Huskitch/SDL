@@ -32,5 +32,6 @@ private:
 	int gridWidth;
 
 	std::vector<std::vector<bool>> gridCells;
+	std::vector<std::vector<bool>> gridCellBuffer;
 };
 
